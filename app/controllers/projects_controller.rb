@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
 
+before_filter :find_project, :only => [:show, :edit, :update, :destroy]
+
   def index
     @projects = Project.all
   end
@@ -42,6 +44,15 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @project.destroy
     flash[:notice] = "Project has been deleted."
+    redirect_to projects_path
+  end
+
+private
+
+  def find_project
+    @project = Project.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+    flash[:alert] = "The project you were looking were could not be found."
     redirect_to projects_path
   end
 end
