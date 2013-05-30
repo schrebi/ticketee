@@ -7,5 +7,15 @@
 <%= link_to "Delete Project", @project, :method => :delete,
  :confirm => "Are you sure you want to delete this project?" %>
 <%= link_to "New Ticket", new_project_ticket_path(@project) %>
+
+
+<ul id="tickets">
+  <% @project.tickets.each do |ticket| %>
+  <li>#<%= ticket.id %> - <%= link_to ticket.title, [@project, ticket] %></li>
+
+<% end %>
+</ul>
+
+
 http://andyhill.us/codeblog/2012/10/14/more-rails-3-in-action-fun-chapter-4/ 
 http://agile-itspeople.blogspot.de/2011/10/when-cucumber-is-mightier-than-pen.html
